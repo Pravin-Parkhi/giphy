@@ -4,3 +4,59 @@
   min-height: 700px;
   width: 100%;
 }
+
+article {
+  column-width: 13em;
+  column-gap: 1em;
+}
+
+section{
+  position: relative;
+}
+
+section:hover .icon-wrapper{
+  display: block;
+}
+
+section:hover .overlay{
+  opacity: 1;
+}
+
+.gif {
+  display: inline-block;
+  margin:  0.25rem;
+  width: 100%;
+}
+
+.icon-wrapper{
+  display: none;
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 95%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0.25rem;
+}
+
+.icon{
+  width: 30px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  fill: #ffffff;
+}
+
+p {
+  margin:  1rem 0; 
+}

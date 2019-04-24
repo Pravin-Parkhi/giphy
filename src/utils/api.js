@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { getGifsSuccess, getGifsFailure } from '../actions/app';
 
+const apiEndPoint = 'http://api.giphy.com/v1/gifs'
+const apiKey = 'FLsPlhfbBHljrQ8KQPlh5utn0AdxseZM'
+
 export function getGifs(dispatch, params) {
-  let url = `http://api.giphy.com/v1/gifs/search?api_key=FLsPlhfbBHljrQ8KQPlh5utn0AdxseZM&q=${params.searchQuery}`;
+  const { searchQuery, offset, limit } = params;
+  let url = `${apiEndPoint}/search?api_key=${apiKey}&q=${searchQuery}&offset=${offset}&limit=${limit}`;
   axios.get(
     url,{
       headers: {

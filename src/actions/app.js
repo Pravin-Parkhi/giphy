@@ -1,6 +1,6 @@
 import ActionTypes from '../constants/action-type';
 
-import { getGifs , getTags} from '../utils/api';
+import { getGifs } from '../utils/api';
 
 // get gifs
 export function fetchGifs(params) {
@@ -22,3 +22,10 @@ export function getGifsFailure(response) {
     response
   }
 }
+
+export function clearGifs() {
+  return {
+    type: ActionTypes.CLEAR_GIFS
+  }
+}
+
