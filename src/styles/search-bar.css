@@ -1,5 +1,11 @@
 .search-bar-wrapper{
   padding: 10px 30px 10px 10px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50px;
+  z-index: 100;
+  background: #000000;
 }
 
 .search-input{

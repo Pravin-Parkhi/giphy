@@ -1,5 +1,5 @@
 .giphy-list-view{
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
   margin: 60px auto 0px auto;
   height: 100%;
   min-height: 700px;
@@ -10,11 +10,11 @@
   color: #ffffff;
   font-weight: bolder;
   text-align: center;
-  margin-top: 50px;
+  padding-top: 150px;
 }
 
 .list-wrapper{
-  margin-top: 10px;
+  margin-top: 110px;
 }
 
 article {
