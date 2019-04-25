@@ -21,7 +21,6 @@ export default class GifTile extends Component {
     this.setState({isPaused: true})
   }
 
-
   /**************************************
    * RENDER METHODS
   **************************************/
@@ -37,6 +36,9 @@ export default class GifTile extends Component {
     )
   }
 
+  /**************************************
+   * LIFECYCLE
+  **************************************/
   render(){
     const { isPaused } = this.state;
     const { gif } = this.props;

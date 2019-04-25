@@ -6,6 +6,9 @@ import GiphyList from './giphy-list/giphy-list';
 
 export default class App extends Component {
 
+  /**************************************
+   * LIFECYCLE
+  **************************************/
   render(){
     return(
       <div className='app'>

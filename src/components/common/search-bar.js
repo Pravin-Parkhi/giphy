@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-
 export default class SearchBar extends Component {
   constructor(){
     super()
@@ -9,6 +8,9 @@ export default class SearchBar extends Component {
     }
   }
 
+  /**************************************
+   * METHODS
+  **************************************/
   handleChange = (event) => {
     const searchQuery = event.target.value;
     this.setState({searchQuery});
@@ -22,6 +24,9 @@ export default class SearchBar extends Component {
     }
   }
 
+  /**************************************
+   * LIFECYCLE
+  **************************************/
   render(){
     const { searchQuery } = this.state
     return(
@@ -30,7 +35,7 @@ export default class SearchBar extends Component {
           className='search-input'
           type="text"
           name="search"
-          placeholder="Search.."
+          placeholder="Search for gifs.."
           value={searchQuery}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}

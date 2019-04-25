@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchGifs , clearGifs } from '../../actions/app';
+import { isEqual } from 'lodash';
 
 import SearchBar from '../common/search-bar'
 import Loader from '../common/loader'
@@ -14,7 +15,8 @@ class GiphyList extends Component {
       searchQuery: '',
       offset: 0,
       limit: 25,
-      timer: null
+      timer: null,
+      isLoaderVisible: false
     }
   }
 
@@ -39,16 +41,18 @@ class GiphyList extends Component {
   }
 
   handleOnScroll = () => {
-    var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
-    var scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
-    var clientHeight = document.documentElement.clientHeight || window.innerHeight;
-    var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+    const { totalCount } = this.props
+    let scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+    let scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
+    let clientHeight = document.documentElement.clientHeight || window.innerHeight;
+    let scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
 
     if (scrolledToBottom) {
       const { offset, limit, searchQuery } = this.state;
-      let nextOffset = offset + limit;
-      if(searchQuery.length){
-        this.setState({offset: nextOffset}, ()=>{
+      const nextOffset = offset + limit;
+      const gifsToBeLoadCount = nextOffset + limit;
+      if(searchQuery.length && (gifsToBeLoadCount < totalCount)){
+        this.setState({offset: nextOffset, isLoaderVisible: true}, ()=>{
           this.getGifs()
         })
       }
@@ -59,14 +63,14 @@ class GiphyList extends Component {
    * RENDER METHODS
   **************************************/
   renderGifList(gifs){
+    const { isLoaderVisible } = this.state;
     return(
-      <div>
+      <div className='list-wrapper'>
         <article>
           {gifs.map((gif, index) => this.renderGif(gif, index))}
         </article>
-        <Loader />
+        { isLoaderVisible && <Loader /> }
       </div>
-      
     )
   }
 
@@ -81,6 +85,12 @@ class GiphyList extends Component {
   **************************************/
   componentDidMount(){
     window.addEventListener('scroll', this.handleOnScroll);
+  }
+
+  componentDidUpdate(prevProps){
+    if(!isEqual(prevProps.gifs, this.props.gifs)){
+      this.setState({isLoaderVisible: false})
+    }
   }
 
   componentWillUnmount(){
@@ -105,7 +115,8 @@ class GiphyList extends Component {
 
 function mapStateToProps(state) {
   return {
-    gifs: state.gifs
+    gifs: state.gifs,
+    totalCount: state.totalCount
   };
 }
 

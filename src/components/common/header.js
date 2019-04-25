@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 
 export default class Header extends Component {
 
+  /**************************************
+   * LIFECYCLE
+  **************************************/
   render(){
     return(
       <div className='header-view'>
