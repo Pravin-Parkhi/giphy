@@ -80,6 +80,14 @@ class GiphyList extends Component {
     )
   }
 
+  renderEmptyState(){
+    return(
+      <div className='empty-state-wrapper'>
+        No GIFS found
+      </div>
+    )
+  }
+
   /**************************************
    * LIFECYCLE
   **************************************/
@@ -107,7 +115,8 @@ class GiphyList extends Component {
             searchGifCallback={(searchQuery) => this.handleGifSearch(searchQuery)}
           />
         </div>
-        {gifs.length ? this.renderGifList(gifs) : null}
+
+        {gifs.length ? this.renderGifList(gifs) : this.renderEmptyState()}
       </div>
     )
   }
